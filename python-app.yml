@@ -28,10 +28,9 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip setuptools wheel
-        pip install --no-use-pep517 numpy==1.21.6
         pip install -r requirements.txt
 
     - name: Run Streamlit app
       run: |
-        chmod +x https://github.com/zibinzhao/Case1/blob/main/app_mix_initiative.py
-        streamlit run https://github.com/zibinzhao/Case1/blob/main/app_mix_initiative.py
+        chmod +x path/to/your/app_mix_initiative.py
+        streamlit run path/to/your/app_mix_initiative.py
