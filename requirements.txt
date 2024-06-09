@@ -7,5 +7,5 @@ joblib==0.16.0
 shap==0.36.0
 streamlit
 scikit-learn==1.1.2
-scipy
-cython
+scipy==1.7.3
+cython==0.29.23
