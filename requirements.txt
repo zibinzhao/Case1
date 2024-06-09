@@ -1,9 +1,11 @@
-numpy==1.23.2
+numpy==1.22.4
 seaborn==0.11.1
 matplotlib==3.4.1
-plotly==4.14.3
+plotly==5.13.0  # Updated version
 pandas==1.2.3
-joblib==0.16.0
+joblib==1.2.0
 shap==0.36.0
-streamlit
-scikit-learn
+streamlit==1.22.0  # Updated version
+scikit-learn==1.1.2
+scipy==1.7.3
+cython==0.29.23
