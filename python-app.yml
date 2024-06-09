@@ -33,5 +33,5 @@ jobs:
 
     - name: Run Streamlit app
       run: |
-        chmod +x path/to/your/app_mix_initiative.py
-        streamlit run path/to/your/app_mix_initiative.py
+        chmod +x https://github.com/zibinzhao/Case1/blob/main/app_mix_initiative.py
+        streamlit run https://github.com/zibinzhao/Case1/blob/main/app_mix_initiative.py
