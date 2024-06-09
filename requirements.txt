@@ -6,4 +6,4 @@ pandas==1.2.3
 joblib==0.16.0
 shap==0.36.0
 streamlit
-scikit-learn==1.1.2
+scikit-learn
