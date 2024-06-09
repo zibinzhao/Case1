@@ -72,7 +72,7 @@ with st.expander("Additional descriptions about variables"):
 variable_selector = st.selectbox('Key variable:',df.columns, index=1)
 st.write('**Count of this variable:**',Counter(df[variable_selector]))
 sns.countplot(x=variable_selector, data=df)
-pl.title('Visualizing the key variable', fontsize=10)
+pl.title('Visualising the key variable', fontsize=10)
 st.pyplot()
 
     ####Visualizing correlations - Cutomer satisfaction Correlation Heatmap
@@ -341,8 +341,8 @@ if classifier == "Random Forest Regression":
         st.write('The **base value** in the force plot shows the **average predicted customer satisfication score** of this regression model.')
         st_shap(shap.force_plot(explainer_1.expected_value, shap_values_2[individual_1,:], X_test.iloc[individual_1,:]))
   
-        st.subheader('2) Local explanations - The Interactive Force Plot')
-        st.write('Visualize the all test set predictions')
+        st.subheader('2) Local Explanations - The Interactive Force Plot')
+        st.write('Visualise the all test set predictions')
         with st.expander("Additional information"):
              st.write('An interactive force plot could be produced by taking many Individual force plots together, rotating them 90 degrees and stacking them horizontally.'
                      ' This interactive force plot can explain the predictions of multiple instances in one plot.'
@@ -352,7 +352,7 @@ if classifier == "Random Forest Regression":
 
         #############Global interpretiability###############
         st.header("4.2 Global Explainability")
-        st.subheader("1) Global explanations - SHAP Feature Importance")
+        st.subheader("1) Global Explanations - SHAP Feature Importance")
         with st.expander("Additional information"):
             st.write("""
          SHAP feature importance is measured as the mean absolute Shapley values.
@@ -363,7 +363,7 @@ if classifier == "Random Forest Regression":
         st.pyplot(bbox_inches='tight')
         pl.clf()
 
-        st.subheader("2) Global explanations - SHAP Summary Plot")
+        st.subheader("2) Global Explanations - SHAP Summary Plot")
         pl.title('SHAP Summary Plot')
         st.write('The horizontal location in this plot shows whether the effect of that value is associated with a higher or lower prediction.')
         with st.expander("Additional information"):
@@ -377,7 +377,7 @@ if classifier == "Random Forest Regression":
 
         #############feature (interactive) dependence plot###############
         # SHAP dependence plot
-        st.subheader("3) Global explanations - The SHAP dependence Plot")
+        st.subheader("3) Global Explanations - The SHAP Dependence Plot")
         st.write("The SHAP dependence plot shows the effect of a single feature across the whole dataset, and tells whether the relationship between the target and the variable is linear, monotonic, or more complex.")
         dependence_plot_3= shap.dependence_plot(feature_selector_3,
                                               shap_values_2,
@@ -386,7 +386,7 @@ if classifier == "Random Forest Regression":
         pl.title('SHAP Depdence Plot', fontsize=10)
         st.pyplot(dependence_plot_3)
         
-        st.subheader("4) Global explanations - The interactive dependence Plot")
+        st.subheader("4) Global Explanations - The Interactive Dependence Plot")
         st.write("Developing a deeper understanding of the data using SHAP: Interaction effects")
         with st.expander("Additional information"):
             st.write('SHAP dependence plots are similar to partial dependence plots, but account for the interaction effects present in the features.'
