@@ -58,7 +58,7 @@ if st.sidebar.checkbox("Display data", False):
     with st.expander("Additional descriptions about variables"):
         st.write("1) **level**: The customer satisfaction levels which grouped by the value of customer satisfaction scores: 0 - Unsatisfied (1,2,3,4,5); 1 - Satisfied (6,7,8,9).")
         st.write("2) **sat**: Latest overall satisfaction score of the customer: 0 – 10, where 10 is extremely satisfied.")
-        st.write("3) **returned**: Number of times the customer order food on (or use) this platform")
+        st.write("3) **ordered**: Number of times the customer order food on (or use) this platform")
         st.write("4) **age**: Age of the customer")
         st.write("5) **speed**: The delivery speed that the customer received the food: 1 - slow; 2 - normal; 3 - fast")
         st.write("6) **single**: 1 - “yes” if the customer is single; 2 - “no” if the customer is not single")
@@ -71,8 +71,8 @@ if st.sidebar.checkbox("Display data", False):
     st.pyplot()
 
     ####Visualizing correlations - Cutomer satisfaction Correlation Heatmap
-    st.subheader("Visualizing correlations")
-    st.write("Visualizing the correlations between each variable by heatmap")
+    st.subheader("Visualising correlations")
+    st.write("Visualising the correlations between each variable by heatmap")
     f, ax = pl.subplots(figsize=(10, 6))
     corr = df.corr()
     hm = sns.heatmap(round(corr,2), annot=True, ax=ax, cmap="Reds",fmt='.2f',
@@ -86,7 +86,7 @@ if st.sidebar.checkbox("Display data", False):
     colbis1, colbis2 = st.sidebar.columns(2)
     V_1 = colbis1.selectbox('Target variable:',df.columns, index=0)
     V_2 = colbis2.selectbox('Key varaible:',df.columns, index=5)
-    st.subheader("Visualizing statistical relationships between two varaibles:")
+    st.subheader("Visualising statistical relationships between two varaibles:")
     sns.set()
     sns.relplot(data=df, x=V_2, y=V_1, kind='line', height=5, aspect=2, color='red');
     st.pyplot()
@@ -97,7 +97,7 @@ if st.sidebar.checkbox("Display data", False):
     V_3 = colbis1.selectbox('Target variable:',df.columns, index=2, key="Target variable_1")
     V_4 = colbis2.selectbox('Key varaible:',df.columns, index=3, key="Key varaible_2")
     V_5 = colbis3.selectbox('interact varaible:',df.columns, index=4)
-    st.subheader("Visualizing relationships between muti-varaibles:")
+    st.subheader("Visualising relationships between muti-varaibles:")
     sns.catplot(x=V_4, y=V_3, hue=V_5, kind="point", data=df)
     st.pyplot()
     
@@ -107,7 +107,7 @@ if st.sidebar.checkbox("Display data", False):
 @st.cache(persist=True)
 def split(df):
     y = df['level']
-    x = df[['returned', 'age', 'speed', 'single', 'dist','income']]
+    x = df[['ordered', 'age', 'speed', 'single', 'dist','income']]
     x_train, x_test, y_train, y_test = train_test_split(x,y,test_size=0.2, random_state=0)
     return x_train, x_test, y_train, y_test
 x_train, x_test, y_train, y_test = split(df)
@@ -116,7 +116,7 @@ x_train, x_test, y_train, y_test = split(df)
 @st.cache(persist=True)
 def split(df):
     Y = df['sat']
-    X = df[['returned', 'age', 'speed', 'single', 'dist','income']]
+    X = df[['ordered', 'age', 'speed', 'single', 'dist','income']]
     X_train, X_test, Y_train, Y_test = train_test_split(X,Y,test_size=0.2, random_state=0)
     return X_train, X_test, Y_train, Y_test
 X_train, X_test, Y_train, Y_test = split(df)
@@ -202,7 +202,7 @@ if classifier == "Random Forest classification":
         explainer = shap.TreeExplainer(model)
         shap_values = explainer.shap_values(x_test)
     #############local interpretiability###############
-        st.header("Local explainability")
+        st.header("Local Explainability")
         st.write('Individual prediction explanation.')
         expectation = explainer.expected_value
         shap_values_1 = explainer.shap_values(x_test.iloc[individual,:])
@@ -228,7 +228,7 @@ if classifier == "Random Forest classification":
 
 
       #############Global interpretiability###############
-        st.header("Global explainability")
+        st.header("Global Explainability")
 
         st.subheader("Global Explanations - SHAP Feature Importance plot")
         with st.expander("Notes"):
@@ -325,7 +325,7 @@ if classifier == "Random Forest Regression":
 
             
         #############local interpretiability###############
-        st.header("Local explainability")
+        st.header("Local Explainability")
         explainer_1 = shap.TreeExplainer(model_1)
         shap_values_2 = explainer_1.shap_values(X_test)
         shap_values_3 = explainer_1.shap_values(X_test.iloc[individual_1,:])
@@ -350,7 +350,7 @@ if classifier == "Random Forest Regression":
         st_shap(shap.force_plot(explainer_1.expected_value, shap_values_2, X_test), 400)
 
         #############explain model predictions by SHAP###############
-        st.header("Global explainability")
+        st.header("Global Explainability")
 
         #############Global interpretiability###############
         st.subheader("Global explanations - SHAP Feature Importance")
@@ -364,7 +364,7 @@ if classifier == "Random Forest Regression":
         st.pyplot(bbox_inches='tight')
         pl.clf()
        
-        st.subheader("Global explanations - SHAP Summary Plot")
+        st.subheader("Global Explanations - SHAP Summary Plot")
         with st.expander("Additional notes"):
             st.write('The SHAP Summary Plot  uses a density scatter plot of the SHAP values for each feature to determine how much each feature affects the model output for individuals in the test dataset.'
                      ' Features are sorted by the sum of the SHAP value magnitudes across all samples.'
@@ -375,7 +375,7 @@ if classifier == "Random Forest Regression":
    
         #############feature (interactive) dependence plot###############
         # SHAP dependence plot
-        st.subheader("Global explanations - The SHAP dependence Plot")
+        st.subheader("Global Explanations - The SHAP dependence Plot")
         with st.expander("Additional notes"):
             st.write('The SHAP dependence plot shows the effect of a single feature across the whole dataset, and tells whether the relationship between the target and the variable is linear, monotonic, or more complex.'
                      ' When selecting features at the sidebar, note that the alglorithm automatically plots the selected feature, with the feature that'
@@ -387,7 +387,7 @@ if classifier == "Random Forest Regression":
         pl.title('SHAP Dependence Plot', fontsize=10)
         st.pyplot(dependence_plot_3)
         
-        st.subheader("Global explanations - The interactive dependence Plot")
+        st.subheader("Global Explanations - The interactive dependence Plot")
         with st.expander("Additional notes"):
             st.write('SHAP dependence plots are similar to partial dependence plots, but account for the interaction effects present in the features.'
                      ' The vertical dispersion of SHAP values at a single feature value is driven by interaction effects, and another feature is chosen for coloring to highlight possible interactions.')
