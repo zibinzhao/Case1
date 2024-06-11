@@ -64,7 +64,7 @@ if st.sidebar.checkbox("Display data", False):
         st.write("6) **single**: 1 - “yes” if the customer is single; 2 - “no” if the customer is not single")
         st.write("7) **dist**: Distance of the customer’s home to the nearest city centre")
         st.write("8) **income**: Income of the respective customer in £")
-        st.write("9) **range**: The income ranges which classified by the value of cusomter's income: 1 - Low income (0<income>=80000); 2 - Medium income (80000<income>=120000); 3 - High income (120000<income>=140000)")
+        st.write("9) **range**: The income ranges which classified by the value of cusomter's income: 1 - Low income (0<income<=80000); 2 - Medium income (80000<income<=120000); 3 - High income (120000<income<=140000)")
     st.write('Count of variable:',Counter(df[variable_selector]))
     sns.countplot(x=variable_selector, data=df)
     pl.title('The count of the key varaible', fontsize=10)
@@ -219,7 +219,7 @@ if classifier == "Random Forest classification":
         
 
         st.subheader("Interactive Force Plot")
-        st.write('Visualize the all test set predictions')
+        st.write('Visualise the all test set predictions')
         with st.expander("Additional notes"):
             st.write('An interactive force plot could be produced by taking many force plot explanations together, rotating them 90 degrees and stacking them horizontally.'
                      ' This interactive force plot can explain the predictions of multiple instances in one plot.'
@@ -342,7 +342,7 @@ if classifier == "Random Forest Regression":
         st_shap(shap.force_plot(explainer_1.expected_value, shap_values_2[individual_1,:], X_test.iloc[individual_1,:]))
 
         st.subheader('The Interactive Force Plot')
-        st.write('Visualize the all test set predictions')
+        st.write('Visualise the all test set predictions')
         with st.expander("See Notes"):
              st.write('An interactive force plot could be produced by taking many force plot explanations together, rotating them 90 degrees and stacking them horizontally.'
                      ' This interactive force plot can explain the predictions of multiple instances in one plot.'
