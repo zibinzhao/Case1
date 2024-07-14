@@ -42,7 +42,7 @@ if __name__ == '__main__':
     main()
 st.set_option('deprecation.showPyplotGlobalUse', False)  
 ###############Data Loading###############
-@st.cache(persist=True)
+@st.cache_data(persist=True)
 def load():
     data= pd.read_csv("https://raw.githubusercontent.com/zibinzhao/Interactivity/main/df_i.csv")
     label= LabelEncoder()
