@@ -5,7 +5,7 @@ plotly==5.13.0  # Updated version
 pandas
 joblib==1.2.0
 shap==0.36.0
-streamlit==1.36.0  # Updated version
+streamlit  # Updated version
 scikit-learn==1.1.2
 scipy
 cython==0.29.23
