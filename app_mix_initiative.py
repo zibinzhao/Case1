@@ -109,7 +109,7 @@ sns.catplot(x=V_4, y=V_3, hue=V_5, kind="point", data=df)
 st.pyplot()
 
 ###############Creating Training and Test splits for Classification model###############
-@st.cache_resource
+@st.cache_data
 def split(df):
     y = df['level']
     x = df[['ordered', 'age', 'speed', 'single', 'dist','income']]
@@ -118,7 +118,7 @@ def split(df):
 x_train, x_test, y_train, y_test = split(df)
 
 ###############Creating Training and Test splits for Regression model###############
-@st.cache_resource
+@st.cache_data
 def split(df):
     Y = df['sat']
     X = df[['ordered', 'age', 'speed', 'single', 'dist','income']]
@@ -149,7 +149,7 @@ st.sidebar.header("3. Choose model")
 classifier = st.sidebar.selectbox("Model", ("Random Forest Regression", "Random Forest classification"))
 
 ###############Visualising SHAP Explantions###############
-@st.cache_resource
+@st.cache_cache_data
 def st_shap(plot, height=None):
     shap_html = f"<head>{shap.getjs()}</head><body>{plot.html()}</body>"
     components.html(shap_html, height=height)
