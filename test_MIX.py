@@ -220,6 +220,8 @@ if classifier == "Random Forest classification":
         st.write('Which features caused this specific prediction? features in **red increased** the prediction, in **blue decreased** them.')
         st.write('The **base value** in the force plot shows the **average predicted customer satisfied probability** of this classification model.')
         st_shap(shap.force_plot(explainer.expected_value[1], shap_values_1[1], x_test.iloc[individual,:]))
+        st.pyplot(bbox_inches='tight')
+        pl.clf()
 
 
         st.subheader("2) Interactive Force Plot")
@@ -229,6 +231,8 @@ if classifier == "Random Forest classification":
                      ' This interactive force plot can explain the **predictions of multiple instances** in one plot.'
                     ' The Y-axis is the X-axis of the individual force plot. There are 865 data points in the X_test, so the X-axis has 865 observations.')
         st_shap(shap.force_plot(explainer.expected_value[1], shap_values[1], x_test), 400)
+        st.pyplot(bbox_inches='tight')
+        pl.clf()
         
 
         #############Global interpretiability###############
