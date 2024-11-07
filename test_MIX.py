@@ -149,7 +149,7 @@ classifier = st.sidebar.selectbox("Model", ("Random Forest Regression", "Random 
 @st.cache_data(persist="disk")
 def st_shap(_plot, _height=None):
     shap_html = f"<head>{shap.getjs()}</head><body>{plot.html()}</body>"
-    components.html(shap_html, _height=height)
+    components.html(shap_html, height=_height)
 
 ###############Training Random Forest classifier Hyperparameters###############
 if classifier == "Random Forest classification":
