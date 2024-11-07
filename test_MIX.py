@@ -219,8 +219,8 @@ if classifier == "Random Forest classification":
         st.subheader("1) The Force Plot - Individual prediction")
         st.write('Which features caused this specific prediction? features in **red increased** the prediction, in **blue decreased** them.')
         st.write('The **base value** in the force plot shows the **average predicted customer satisfied probability** of this classification model.')
-        st_shap(shap.force_plot(explainer.expected_value[1], shap_values_1[1], x_test.iloc[individual,:]))
-        st.pyplot(bbox_inches='tight')
+        force_plot_1 = shap.force_plot(explainer.expected_value[1], shap_values_1[1], x_test.iloc[individual,:])
+        st_shap(force_plot_1, height=200)
         pl.clf()
 
 
@@ -230,8 +230,8 @@ if classifier == "Random Forest classification":
             st.write('An interactive force plot could be produced by taking many individual force plot explanations together, rotating them 90 degrees and stacking them horizontally.'
                      ' This interactive force plot can explain the **predictions of multiple instances** in one plot.'
                     ' The Y-axis is the X-axis of the individual force plot. There are 865 data points in the X_test, so the X-axis has 865 observations.')
-        st_shap(shap.force_plot(explainer.expected_value[1], shap_values[1], x_test), 400)
-        st.pyplot(bbox_inches='tight')
+        force_plot_2 = shap.force_plot(explainer.expected_value[1], shap_values[1], x_test)
+        st_shap(force_plot_2, height=400)
         pl.clf()
         
 
@@ -343,7 +343,10 @@ if classifier == "Random Forest Regression":
         st.subheader("1) The Force Plot - individual prediction")
         st.write('Which features caused this specific prediction? features in **red increased** the prediction, in **blue decreased** them.')
         st.write('The **base value** in the force plot shows the **average predicted customer satisfication score** of this regression model.')
-        st_shap(shap.force_plot(explainer_1.expected_value, shap_values_2[individual_1,:], X_test.iloc[individual_1,:]))
+        force_plot_3 = shap.force_plot(explainer_1.expected_value, shap_values_2[individual_1,:], X_test.iloc[individual_1,:])
+        st_shap(force_plot_3, height=200)
+        pl.clf()
+
   
         st.subheader('2) Local Explanations - The Interactive Force Plot')
         st.write('Visualise the all test set predictions')
@@ -351,7 +354,9 @@ if classifier == "Random Forest Regression":
              st.write('An interactive force plot could be produced by taking many Individual force plots together, rotating them 90 degrees and stacking them horizontally.'
                      ' This interactive force plot can explain the predictions of multiple instances in one plot.'
                       ' The Y-axis is the X-axis of the individual force plot. There are 865 data points in the X_test, so the X-axis has 865 observations.')
-        st_shap(shap.force_plot(explainer_1.expected_value, shap_values_2, X_test), 400)
+        force_plot_4 = shap.force_plot(explainer_1.expected_value, shap_values_2, X_test)
+        st_shap(force_plot_4, height=400)
+        pl.clf()
         
 
         #############Global interpretiability###############
