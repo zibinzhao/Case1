@@ -3,7 +3,7 @@
 from numpy.core.numeric import True_
 import streamlit as st
 import sklearn
-from streamlit import components
+import streamlit.components.v1 as components
 import pandas as pd
 import numpy as np
 from collections import Counter
@@ -147,10 +147,9 @@ classifier = st.sidebar.selectbox("Model", ("Random Forest Regression", "Random 
 
 ###############Visualising SHAP Explantions###############
 @st.cache_data(persist="disk")
-def st_shap(_plot, _height=None):
-    # Use _plot instead of plot in the function body
-    shap_html = f"<head>{shap.getjs()}</head><body>{_plot.html()}</body>"
-    components.html(shap_html, height=_height)
+def st_shap(plot, height=None):
+    shap_html = f"<head>{shap.getjs()}</head><body>{plot.html()}</body>"
+    components.html(shap_html, height=height)
 
 ###############Training Random Forest classifier Hyperparameters###############
 if classifier == "Random Forest classification":
@@ -217,11 +216,7 @@ if classifier == "Random Forest classification":
         st.subheader("1) The Force Plot - Individual prediction")
         st.write('Which features caused this specific prediction? features in **red increased** the prediction, in **blue decreased** them.')
         st.write('The **base value** in the force plot shows the **average predicted customer satisfied probability** of this classification model.')
-        individual_force_plot_1 = shap.force_plot(
-        explainer.expected_value[1],
-        shap_values[1][individual:individual+1,:],  # Select single instance
-        x_test.iloc[individual:individual+1,:])
-        st_shap(individual_force_plot_1)
+        st_shap(shap.force_plot(explainer.expected_value[1], shap_values_1[1], x_test.iloc[individual,:]))
 
 
         st.subheader("2) Interactive Force Plot")
@@ -230,12 +225,7 @@ if classifier == "Random Forest classification":
             st.write('An interactive force plot could be produced by taking many individual force plot explanations together, rotating them 90 degrees and stacking them horizontally.'
                      ' This interactive force plot can explain the **predictions of multiple instances** in one plot.'
                     ' The Y-axis is the X-axis of the individual force plot. There are 865 data points in the X_test, so the X-axis has 865 observations.')
-        full_force_plot_1 = shap.force_plot(
-        explainer.expected_value[1],
-        shap_values[1],
-        x_test)
-        st_shap(full_force_plot_1, height=400)
-
+        st_shap(shap.force_plot(explainer.expected_value[1], shap_values[1], x_test), 400)
         
 
         #############Global interpretiability###############
@@ -346,13 +336,7 @@ if classifier == "Random Forest Regression":
         st.subheader("1) The Force Plot - individual prediction")
         st.write('Which features caused this specific prediction? features in **red increased** the prediction, in **blue decreased** them.')
         st.write('The **base value** in the force plot shows the **average predicted customer satisfication score** of this regression model.')
-        
-        individual_force_plot_2 = shap.force_plot(
-        explainer_1.expected_value,
-        shap_values_2[individual_1:individual_1+1,:],  # Select single instance
-        X_test.iloc[individual_1:individual_1+1,:])
-        st_shap(individual_force_plot_2)
-
+        st_shap(shap.force_plot(explainer_1.expected_value, shap_values_2[individual_1,:], X_test.iloc[individual_1,:]))
   
         st.subheader('2) Local Explanations - The Interactive Force Plot')
         st.write('Visualise the all test set predictions')
@@ -360,12 +344,7 @@ if classifier == "Random Forest Regression":
              st.write('An interactive force plot could be produced by taking many Individual force plots together, rotating them 90 degrees and stacking them horizontally.'
                      ' This interactive force plot can explain the predictions of multiple instances in one plot.'
                       ' The Y-axis is the X-axis of the individual force plot. There are 865 data points in the X_test, so the X-axis has 865 observations.')
-        
-        full_force_plot_2 = shap.force_plot(
-        explainer_1.expected_value,
-        shap_values_2,
-        X_test)
-        st_shap(full_force_plot_2, height=400)        
+        st_shap(shap.force_plot(explainer_1.expected_value, shap_values_2, X_test), 400)
         
 
         #############Global interpretiability###############
