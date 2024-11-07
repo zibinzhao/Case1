@@ -3,7 +3,7 @@
 from numpy.core.numeric import True_
 import streamlit as st
 import sklearn
-import streamlit.components.v1 as components
+from streamlit import components
 import pandas as pd
 import numpy as np
 from collections import Counter
@@ -39,8 +39,7 @@ def main():
     st.write("4. Choose which SHAP explanations to look at")
               
 if __name__ == '__main__':
-    main()
-st.set_option('deprecation.showPyplotGlobalUse', False)  
+    main() 
 ###############Data Loading###############
 @st.cache_data(persist="disk")
 def load():
@@ -142,8 +141,6 @@ def plot_metrics(metrics_list):
         st.pyplot()
 class_names = ["Satisfied", "Unsatisfied"]
 
-st.set_option('deprecation.showPyplotGlobalUse', False)
-
 ###############Training an Random Forest Model###############
 st.sidebar.header("3. Choose model")
 classifier = st.sidebar.selectbox("Model", ("Random Forest Regression", "Random Forest classification"))
@@ -220,7 +217,7 @@ if classifier == "Random Forest classification":
         st.write('Which features caused this specific prediction? features in **red increased** the prediction, in **blue decreased** them.')
         st.write('The **base value** in the force plot shows the **average predicted customer satisfied probability** of this classification model.')
         force_plot_1 = shap.force_plot(explainer.expected_value[1], shap_values_1[1], x_test.iloc[individual,:])
-        st.pyplot(force_plot_1)
+        st_shap(force_plot_1)
 
 
         st.subheader("2) Interactive Force Plot")
@@ -230,7 +227,7 @@ if classifier == "Random Forest classification":
                      ' This interactive force plot can explain the **predictions of multiple instances** in one plot.'
                     ' The Y-axis is the X-axis of the individual force plot. There are 865 data points in the X_test, so the X-axis has 865 observations.')
         force_plot_2 = shap.force_plot(explainer.expected_value[1], shap_values[1], x_test)
-        st.pyplot(force_plot_2, height=400)
+        st_shap(force_plot_2, height=400)
         
 
         #############Global interpretiability###############
@@ -342,7 +339,7 @@ if classifier == "Random Forest Regression":
         st.write('Which features caused this specific prediction? features in **red increased** the prediction, in **blue decreased** them.')
         st.write('The **base value** in the force plot shows the **average predicted customer satisfication score** of this regression model.')
         force_plot_3 = shap.force_plot(explainer_1.expected_value, shap_values_2[individual_1,:], X_test.iloc[individual_1,:])
-        st.pyplot(force_plot_3)
+        st_shap(force_plot_3)
         
 
   
@@ -353,7 +350,7 @@ if classifier == "Random Forest Regression":
                      ' This interactive force plot can explain the predictions of multiple instances in one plot.'
                       ' The Y-axis is the X-axis of the individual force plot. There are 865 data points in the X_test, so the X-axis has 865 observations.')
         force_plot_4 = shap.force_plot(explainer_1.expected_value, shap_values_2, X_test)
-        st.pyplot(force_plot_4, height=400)
+        st_shap(force_plot_4, height=400)
         
         
 
